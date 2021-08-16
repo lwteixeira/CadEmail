@@ -11,6 +11,7 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreateEmailTest {
 
+    ChromeOptions options;
     ChromeDriver driver;
     Browser browser;
     PageCadastro pageCad;
@@ -31,9 +33,11 @@ public class CreateEmailTest {
         @Dado("^que estou na pagina do provedor de email\\.$")
     public void que_estou_na_pagina_do_provedor_de_email() throws Exception
     {
+            options = new ChromeOptions();
+            options.addArguments("--incognito");
             browser = new Browser();
             System.setProperty(browser.WEBCHROMEDRIVE, browser.PATHCHROME);
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
             driver.navigate().to(browser.URLPAGE);
             wait = new WebDriverWait(driver, 60);
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
